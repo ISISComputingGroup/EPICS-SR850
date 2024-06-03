@@ -1,18 +1,36 @@
+OutTerminator = '\r\n';
+InTerminator = '\r';
+ReplyTimeout = 2000;
+
 getIDN {
     out "*IDN?";
-    in "%\$1[^\r\n]";
+    in "%s";
     ExtraInput = Ignore;
 }
 
-cmd {
-    out "\$$1";
+setRemote
+{
+    #Needs to be done first
+    out "LOCL 1";
 }
 
-setD {
-    out "\$1 %d";
-}
-getD {
-    out "\$1?";
-    in "%d";
+getFREQ {
+    out "FREQ?";
+    in "%f";
     ExtraInput = Ignore;
 }
+
+getOUTPUT {
+    out "OUTP? \$1";
+    in "%f";
+    ExtraInput = Ignore;
+}
+
+setFREQ {
+    # Set into remote mode in order to set frequency
+    out "LOCL 1";
+
+    # set the frequency
+    out "FREQ %f";
+}
+

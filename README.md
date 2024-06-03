@@ -1,1 +1,1 @@
-# Blank README
+# Stanford SR850 Lockin Amplifier 
