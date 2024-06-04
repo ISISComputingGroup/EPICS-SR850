@@ -119,6 +119,7 @@ record(ao, "$(P)FREQ:SP") {
     field(DESC, "Set Lock In Amplifier Frequency")
     field(DTYP, "stream")
     field(OUT, "@sr850.proto setFREQ $(PORT)")
+	field(PREC, "3")
     field(SIML, "$(P)SIM")
     field(SIOL, "$(P)SIM:FREQ:SP")
     field(SDIS, "$(P)DISABLE")
