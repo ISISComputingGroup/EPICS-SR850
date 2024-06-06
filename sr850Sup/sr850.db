@@ -121,7 +121,12 @@ record(ao, "$(P)FREQ:SP") {
     field(OUT, "@sr850.proto setFREQ $(PORT)")
 	field(PREC, "3")
     field(SIML, "$(P)SIM")
-    field(SIOL, "$(P)SIM:FREQ:SP")
+    field(SIOL, "$(P)SIM:FREQ")
     field(SDIS, "$(P)DISABLE")
 }
 
+record(ai, "$(P)SIM:FREQ")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}

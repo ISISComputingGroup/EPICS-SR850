@@ -9,7 +9,13 @@ class SimulatedSr850(StateMachineDevice):
         """
         Initialize all of the device's attributes.
         """
-        pass
+        self.identifier = "Something"
+        self.outpx = 1.5001
+        self.outpy = 1.5002
+        self.outpr = 1.5003
+        self.outpt = 1.5004
+        self.local = 1
+        self.freq  = 10100
 
     def _get_state_handlers(self):
         return {
