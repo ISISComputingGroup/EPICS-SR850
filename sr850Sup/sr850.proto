@@ -1,0 +1,36 @@
+OutTerminator = '\r\n';
+InTerminator = '\r';
+ReplyTimeout = 2000;
+
+getIDN {
+    out "*IDN?";
+    in "%s";
+    ExtraInput = Ignore;
+}
+
+setRemote
+{
+    #Needs to be done first
+    out "LOCL 1";
+}
+
+getFREQ {
+    out "FREQ?";
+    in "%f";
+    ExtraInput = Ignore;
+}
+
+getOUTPUT {
+    out "OUTP? \$1";
+    in "%f";
+    ExtraInput = Ignore;
+}
+
+setFREQ {
+    # Set into remote mode in order to set frequency
+    out "LOCL 1";
+
+    # set the frequency
+    out "FREQ %f";
+}
+

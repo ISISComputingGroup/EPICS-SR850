@@ -1,1 +1,1 @@
-# EPICS-SR850
+# Stanford SR850 Lockin Amplifier 

@@ -1,0 +1,132 @@
+record(bo, "$(P)SIM")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(ZNAM, "NO")
+    field(ONAM, "YES")
+    field(VAL, "$(RECSIM=0)")
+    field(PINI, "YES")
+}
+
+record(bo, "$(P)DISABLE")
+{
+    field(DESC, "Disable comms")
+    field(PINI, "YES")
+    field(VAL, "$(DISABLE=0)")
+    field(OMSL, "supervisory")
+    field(ZNAM, "COMMS ENABLED")
+    field(ONAM, "COMMS DISABLED")
+}
+
+record(bo, "$(P)REMOTE") 
+{
+    #Must be put into remote or reset before Any related commands sent
+    field(DESC, "Put the unit into remote mode")
+    field(SCAN, "Passive")
+    field(DTYP, "stream")
+    field(OUT,  "@sr850.proto setRemote $(PORT)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(VAL, "1")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:REMOTE")
+    field(SDIS, "$(P)DISABLE")
+}
+
+record(stringin, "$(P)IDN")
+{
+    field(DESC, "SR850 identification string")
+    field(DTYP, "stream")
+    field(INP,  "@sr850.proto getIDN $(PORT)")
+    field(PINI, "YES")
+    field(FLNK, "$(P)REMOTE")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:IDN")
+    field(SDIS, "$(P)DISABLE")
+}
+
+record(ai, "$(P)FREQ")
+{
+    field(DESC, "SR850 Frequency")
+    field(DTYP, "stream")
+    field(INP,  "@sr850.proto getFREQ $(PORT)")
+	field(SCAN, "2 second")
+	field(PREC, "3")
+    field(PINI, "YES")
+    field(FLNK, "$(P)REMOTE")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:FREQ")
+    field(SDIS, "$(P)DISABLE")
+}
+
+record(ai, "$(P)OUTPX")
+{
+    field(DESC, "SR850 Output X Axis")
+    field(DTYP, "stream")
+    field(INP,  "@sr850.proto getOUTPUT(1) $(PORT)")
+	field(SCAN, "2 second")
+	field(PREC, "7")
+    field(PINI, "YES")
+    field(FLNK, "$(P)REMOTE")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPX")
+    field(SDIS, "$(P)DISABLE")
+}
+
+record(ai, "$(P)OUTPY")
+{
+    field(DESC, "SR850 Output Y axis")
+    field(DTYP, "stream")
+    field(INP,  "@sr850.proto getOUTPUT(2) $(PORT)")
+	field(SCAN, "2 second")
+	field(PREC, "7")
+    field(PINI, "YES")
+    field(FLNK, "$(P)REMOTE")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPY")
+    field(SDIS, "$(P)DISABLE")
+}
+
+record(ai, "$(P)OUTPR")
+{
+    field(DESC, "SR850 Output R Axis")
+    field(DTYP, "stream")
+    field(INP,  "@sr850.proto getOUTPUT(3) $(PORT)")
+	field(SCAN, "2 second")
+	field(PREC, "7")
+    field(PINI, "YES")
+    field(FLNK, "$(P)REMOTE")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPY")
+    field(SDIS, "$(P)DISABLE")
+}
+
+record(ai, "$(P)OUTPT")
+{
+    field(DESC, "SR850 Output Theta axis")
+    field(DTYP, "stream")
+    field(INP,  "@sr850.proto getOUTPUT(4) $(PORT)")
+	field(SCAN, "2 second")
+	field(PREC, "7")
+    field(PINI, "YES")
+    field(FLNK, "$(P)REMOTE")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:OUTPT")
+    field(SDIS, "$(P)DISABLE")
+}
+
+record(ao, "$(P)FREQ:SP") {
+    field(DESC, "Set Lock In Amplifier Frequency")
+    field(DTYP, "stream")
+    field(OUT, "@sr850.proto setFREQ $(PORT)")
+	field(PREC, "3")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:FREQ")
+    field(SDIS, "$(P)DISABLE")
+}
+
+record(ai, "$(P)SIM:FREQ")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
