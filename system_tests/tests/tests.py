@@ -26,10 +26,11 @@ class Sr850Tests(unittest.TestCase):
     """
     Tests for the _Device_ IOC.
     """
+
     def setUp(self):
         self._lewis, self._ioc = get_running_lewis_and_ioc("sr850", DEVICE_PREFIX)
         self.ca = ChannelAccess(device_prefix=DEVICE_PREFIX)
-        
+
     @skip_if_recsim("Requires lewis backdoor")
     def test_that_IDN_IS_RETURNED(self):
         value = "SR850"
@@ -45,14 +46,14 @@ class Sr850Tests(unittest.TestCase):
     @skip_if_recsim("Requires lewis backdoor")
     def test_that_OUTPY_IS_RETURNED(self):
         self._lewis.backdoor_set_on_device("outpy", 2.5002)
-        self.ca.assert_that_pv_is("OUTPY", 2.5002) 
+        self.ca.assert_that_pv_is("OUTPY", 2.5002)
 
     @skip_if_recsim("Requires lewis backdoor")
     def test_that_OUTPR_IS_RETURNED(self):
         self._lewis.backdoor_set_on_device("outpr", 2.5003)
         self.ca.assert_that_pv_is("OUTPR", 2.5003)
 
-    @skip_if_recsim("Requires lewis backdoor")        
+    @skip_if_recsim("Requires lewis backdoor")
     def test_that_OUTPT_IS_RETURNED(self):
         self._lewis.backdoor_set_on_device("outpt", 2.5004)
         self.ca.assert_that_pv_is("OUTPT", 2.5004)
@@ -68,4 +69,6 @@ class Sr850Tests(unittest.TestCase):
 
     @parameterized.expand([505.50, 606.0, 700])
     def test_that_WHEN_Freq_is_set_THEN_value_matches(self, freq):
-        self.ca.assert_setting_setpoint_sets_readback(freq, readback_pv="FREQ", set_point_pv="FREQ:SP")
+        self.ca.assert_setting_setpoint_sets_readback(
+            freq, readback_pv="FREQ", set_point_pv="FREQ:SP"
+        )
