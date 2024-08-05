@@ -1,12 +1,10 @@
-from lewis.adapters.stream import StreamInterface, Cmd
-from lewis.utils.command_builder import CmdBuilder
+from lewis.adapters.stream import StreamInterface
 from lewis.core.logging import has_log
-from lewis.utils.replies import conditional_reply
+from lewis.utils.command_builder import CmdBuilder
 
 
 @has_log
 class Sr850StreamInterface(StreamInterface):
-    
     in_terminator = "\r\n"
     out_terminator = "\r"
 
@@ -21,7 +19,7 @@ class Sr850StreamInterface(StreamInterface):
             CmdBuilder("get_outpy").escape("OUTP? 2").eos().build(),
             CmdBuilder("get_outpr").escape("OUTP? 3").eos().build(),
             CmdBuilder("get_outpt").escape("OUTP? 4").eos().build(),
-            CmdBuilder("get_freq").escape("FREQ?").eos().build()
+            CmdBuilder("get_freq").escape("FREQ?").eos().build(),
         }
 
     def handle_error(self, request, error):
@@ -34,12 +32,13 @@ class Sr850StreamInterface(StreamInterface):
 
         """
         self.log.error("An error occurred at request " + repr(request) + ": " + repr(error))
+
     def set_remote(self, remote):
         self.device.local = remote
 
     def set_freq(self, freq):
         self.device.freq = freq
-        
+
     def get_idn(self):
         return self.device.identifier
 
@@ -54,9 +53,9 @@ class Sr850StreamInterface(StreamInterface):
 
     def get_outpt(self):
         return self.device.outpt
- 
+
     def get_freq(self):
         return self.device.freq
-        
+
     def catch_all(self, command):
         pass

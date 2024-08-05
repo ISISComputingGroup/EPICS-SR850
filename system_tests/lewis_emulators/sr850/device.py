@@ -1,10 +1,11 @@
 from collections import OrderedDict
-from .states import DefaultState
+
 from lewis.devices import StateMachineDevice
+
+from .states import DefaultState
 
 
 class SimulatedSr850(StateMachineDevice):
-
     def _initialize_data(self):
         """
         Initialize all of the device's attributes.
@@ -15,15 +16,15 @@ class SimulatedSr850(StateMachineDevice):
         self.outpr = 1.5003
         self.outpt = 1.5004
         self.local = 1
-        self.freq  = 10100
+        self.freq = 10100
 
     def _get_state_handlers(self):
         return {
-            'default': DefaultState(),
+            "default": DefaultState(),
         }
 
     def _get_initial_state(self):
-        return 'default'
+        return "default"
 
     def _get_transition_handlers(self):
         return OrderedDict([])
